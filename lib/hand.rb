@@ -4,10 +4,6 @@ class Hand
 
   attr_reader :cards
 
-  def initialize(cards)
-    @cards = cards.sort_by { |card| card.value }
-  end
-
   HAND_VALUES = {
                 :royal_flush => 10,
                 :straight_flush => 9,
@@ -20,6 +16,22 @@ class Hand
                 :one_pair => 2,
                 :high_card => 1
               }
+
+  def initialize(cards)
+    @cards = cards.sort_by { |card| card.value }
+  end
+
+  def self.best_hand(*players)
+    playername_score = Hash.new
+    players.each do |player|
+      playername_score[player.name] = player.hand.calculate
+    end
+  end
+
+
+  def calculate_hand
+    HAND_VALUES[check_hand]
+  end
 
   def check_hand
     return :royal_flush if royal_flush?
@@ -88,6 +100,59 @@ class Hand
     values.uniq.length == 5
   end
 
+  def royal_flush_calculate(other_hand)
+    # in case of both hands are the same,
+    # returns the better_hand
+  end
+
+  def straight_flush_calculate(other_hand)
+    # in case of both hands are the same,
+    # returns the better_hand
+  end
+
+  def four_of_a_kind_calculate(other_hand)
+    # in case of both hands are the same,
+    # returns the better_hand
+  end
+
+  def full_house_calculate(other_hand) #only valid if tested after four_of_a_kind?
+    # in case of both hands are the same,
+    # returns the better_hand
+    enD
+
+  def flush_calculate(other_hand)
+    # in case of both hands are the same,
+    # returns the better_hand
+  end
+
+  def straight_calculate(other_hand)
+    # in case of both hands are the same,
+    # returns the better_hand
+  end
+
+  def three_of_a_kind_calculate(other_hand)
+    # in case of both hands are the same,
+    # returns the better_hand
+  end
+
+  def two_pairs_calculate(other_hand)
+    # in case of both hands are the same,
+    # returns the better_hand
+    end
+
+  def one_pair_calculate(other_hand)
+    # in case of both hands are the same,
+    # returns the better_hand
+  end
+
+  def high_card_calculate(other_hand)
+    # in case of both hands are the same,
+    # returns the better_hand
+  end
+
+  def discard(card)
+    cards.delete(card)
+  end
 
   def get_values
     @cards.map { |card| card.value }

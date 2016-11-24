@@ -125,4 +125,12 @@ describe "Hand" do
       expect(hand3.check_hand).to eq(:four_of_a_kind)
     end
   end
+
+  describe "#discard" do
+    it "deletes the given card from hand" do
+      expect(hand1.cards.length).to eq(5)
+      hand1.discard(card1)
+      expect(hand1.cards.length).to eq(4)
+    end
+  end
 end
